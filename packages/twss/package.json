@@ -4,9 +4,12 @@
   "private": true,
   "main": "./dist/index.js",
   "types": "./dist/index.d.ts",
+  "bin": {
+    "twss": "./dist/cli.js"
+  },
   "scripts": {
-    "build": "tsc",
-    "dev": "tsc --watch"
+    "build": "tsup",
+    "dev": "tsup --watch"
   },
   "peerDependencies": {
     "next": ">=15"
@@ -14,6 +17,7 @@
   "devDependencies": {
     "@types/node": "^20",
     "next": "16.2.1",
+    "tsup": "^8.5.1",
     "typescript": "^5"
   }
 }
