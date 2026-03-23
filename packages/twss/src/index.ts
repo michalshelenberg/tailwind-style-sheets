@@ -1,1 +1,2 @@
-export const hello = (name: string) => `Hello, ${name}!`
+export { withTwssPlugin } from "./plugin";
+export type { TwssPluginOptions } from "./plugin";

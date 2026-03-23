@@ -8,7 +8,12 @@
     "build": "tsc",
     "dev": "tsc --watch"
   },
+  "peerDependencies": {
+    "next": ">=15"
+  },
   "devDependencies": {
+    "@types/node": "^20",
+    "next": "16.2.1",
     "typescript": "^5"
   }
 }
