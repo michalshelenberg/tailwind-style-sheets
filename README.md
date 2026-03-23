@@ -1,36 +1,95 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# twss
 
-## Getting Started
+A Turbopack loader and Next.js plugin for `.twss` files — co-locate your Tailwind class maps alongside components.
 
-First, run the development server:
+## What it does
 
-```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
+`.twss` files use a CSS-like syntax to define named Tailwind class groups:
+
+```css
+/* Button.styles.twss */
+.base {
+  @apply px-4 py-2 rounded font-semibold;
+}
+
+.primary {
+  @apply bg-blue-600 text-white hover:bg-blue-700;
+}
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+Importing a `.twss` file gives you a plain object:
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+```ts
+import styles from "./Button.styles.twss";
+// styles.base    → "px-4 py-2 rounded font-semibold"
+// styles.primary → "bg-blue-600 text-white hover:bg-blue-700"
+```
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+## Installation
 
-## Learn More
+```bash
+npx twss init
+```
 
-To learn more about Next.js, take a look at the following resources:
+This scaffolds all required files and installs the package. To set up manually:
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+```bash
+npm install twss
+```
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+## Setup
 
-## Deploy on Vercel
+### `next.config.ts`
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+```ts
+import type { NextConfig } from "next";
+import path from "path";
+import { withTwssPlugin } from "twss";
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+const nextConfig: NextConfig = {};
+
+export default withTwssPlugin(nextConfig, {
+  globalsCSS: path.resolve(__dirname, "src/app/globals.css"),
+  watchDir: path.resolve(__dirname, "src"),
+});
+```
+
+`withTwssPlugin` options:
+
+| Option       | Type     | Description                                                                          |
+| ------------ | -------- | ------------------------------------------------------------------------------------ |
+| `globalsCSS` | `string` | Absolute path to your global CSS file. Touched on `.twss` changes to trigger HMR.   |
+| `watchDir`   | `string` | Directory to watch recursively for `.twss` file changes. Only active in development. |
+
+Both options are optional. Omitting them disables the HMR watcher (the loader still works).
+
+### TypeScript
+
+Add a declaration file so TypeScript knows `.twss` imports return `Record<string, string>`:
+
+```ts
+// global.d.ts
+declare module "*.twss" {
+  const styles: Record<string, string>;
+  export default styles;
+}
+```
+
+### VSCode
+
+Add to `.vscode/settings.json` to get CSS syntax highlighting and silence the `@apply` warning:
+
+```json
+{
+  "css.lint.unknownAtRules": "ignore",
+  "files.associations": {
+    "*.twss": "css"
+  }
+}
+```
+
+## How it works
+
+1. **Loader** (`loader.ts`) — Turbopack passes the raw `.twss` file content through the loader. A regex extracts each `.className { @apply ... }` block and converts it to `export default { className: "class1 class2 ..." }`.
+
+2. **HMR watcher** (`plugin.ts`) — In development, `fs.watch` monitors `watchDir` for `.twss` changes. When a change is detected, it touches `globalsCSS`, which causes Next.js to re-run Tailwind's class scan and hot-reload styles.
