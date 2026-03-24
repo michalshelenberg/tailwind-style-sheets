@@ -58,8 +58,8 @@ if (vscodeChanged) {
 }
 
 // install twss
-console.log("installing twss...");
-execSync("npm install twss", { stdio: "inherit", cwd });
+console.log("installing @michalshelenberg/twss...");
+execSync("npm install @michalshelenberg/twss", { stdio: "inherit", cwd });
 
 console.log("\ndone. add withTwssPlugin to your next.config.ts:");
 console.log(`
