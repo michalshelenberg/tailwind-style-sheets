@@ -77,6 +77,8 @@ declare module "*.twss" {
 
 ### VSCode
 
+Install the [Tailwind CSS IntelliSense](https://marketplace.visualstudio.com/items?itemName=bradlc.vscode-tailwindcss) extension to get Tailwind class autocomplete and hover previews inside `.twss` files.
+
 Add to `.vscode/settings.json` to get CSS syntax highlighting and silence the `@apply` warning:
 
 ```json

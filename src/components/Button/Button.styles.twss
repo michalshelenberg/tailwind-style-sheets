@@ -1,11 +1,14 @@
 .button {
   @apply
+  cursor-pointer
   px-4
   py-2
   rounded-full
   text-sm
   font-medium
-  transition-colors
-  bg-foreground
-  text-background;
+  bg-blue-600
+  text-white
+  hover:bg-blue-700
+  active:scale-95
+  transition-all;
 }
