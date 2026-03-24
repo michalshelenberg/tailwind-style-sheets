@@ -61,13 +61,35 @@ if (vscodeChanged) {
 console.log("installing @michalshelenberg/twss...");
 execSync("npm install @michalshelenberg/twss", { stdio: "inherit", cwd });
 
-console.log("\ndone. add withTwssPlugin to your next.config.ts:");
-console.log(`
-  import path from "path";
-  import { withTwssPlugin } from "@michalshelenberg/twss";
+// next.config.ts
+const nextConfigPath = ["next.config.ts", "next.config.mjs", "next.config.js"]
+  .map((f) => path.join(cwd, f))
+  .find((f) => fs.existsSync(f));
 
-  export default withTwssPlugin(nextConfig, {
-    globalsCSS: path.resolve(__dirname, "src/app/globals.css"),
-    watchDir: path.resolve(__dirname, "src"),
-  });
-`);
+if (!nextConfigPath) {
+  console.log("skipped  next.config.ts (not found)");
+} else {
+  let src = fs.readFileSync(nextConfigPath, "utf8");
+  if (src.includes("withTwssPlugin")) {
+    console.log(`skipped  ${path.relative(cwd, nextConfigPath)} (already contains withTwssPlugin)`);
+  } else {
+    // add imports after the last existing import line
+    const lastImportIdx = [...src.matchAll(/^import .+$/gm)].at(-1);
+    const insertAfter = lastImportIdx
+      ? lastImportIdx.index! + lastImportIdx[0].length
+      : 0;
+    const imports = `\nimport path from "path";\nimport { withTwssPlugin } from "@michalshelenberg/twss";`;
+    src = src.slice(0, insertAfter) + imports + src.slice(insertAfter);
+
+    // wrap export default <id>; with withTwssPlugin
+    src = src.replace(
+      /export default (\w+);/,
+      `export default withTwssPlugin($1, {\n  globalsCSS: path.resolve(__dirname, "src/app/globals.css"),\n  watchDir: path.resolve(__dirname, "src"),\n});`
+    );
+
+    fs.writeFileSync(nextConfigPath, src, "utf8");
+    console.log(`updated  ${path.relative(cwd, nextConfigPath)}`);
+  }
+}
+
+console.log("\ndone.");
