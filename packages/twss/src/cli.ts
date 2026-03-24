@@ -66,7 +66,7 @@ execSync("npm install twss", { stdio: "inherit", cwd });
 console.log("\ndone. add withTwssPlugin to your next.config.ts:");
 console.log(`
   import path from "path";
-  import { withTwssPlugin } from "twss";
+  import { withTwssPlugin } from "@michalshelenberg/twss";
 
   export default withTwssPlugin(nextConfig, {
     globalsCSS: path.resolve(__dirname, "src/app/globals.css"),

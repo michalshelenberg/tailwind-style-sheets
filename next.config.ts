@@ -1,6 +1,6 @@
 import type { NextConfig } from "next";
 import path from "path";
-import { withTwssPlugin } from "twss";
+import { withTwssPlugin } from "@michalshelenberg/twss";
 
 const nextConfig: NextConfig = {};
 

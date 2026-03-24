@@ -1,7 +1,6 @@
 {
-  "name": "twss",
-  "version": "0.1.0",
-  "private": true,
+  "name": "@michalshelenberg/twss",
+  "version": "0.0.1",
   "main": "./dist/index.js",
   "types": "./dist/index.d.ts",
   "bin": {
@@ -13,6 +12,9 @@
   },
   "peerDependencies": {
     "next": ">=15"
+  },
+  "publishConfig": {
+    "access": "public"
   },
   "devDependencies": {
     "@types/node": "^20",

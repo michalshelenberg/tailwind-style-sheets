@@ -28,13 +28,13 @@ import styles from "./Button.styles.twss";
 ## Installation
 
 ```bash
-npx twss init
+npx @michalshelenberg/twss init
 ```
 
 This scaffolds all required files and installs the package. To set up manually:
 
 ```bash
-npm install twss
+npm install @michalshelenberg/twss
 ```
 
 ## Setup
@@ -44,7 +44,7 @@ npm install twss
 ```ts
 import type { NextConfig } from "next";
 import path from "path";
-import { withTwssPlugin } from "twss";
+import { withTwssPlugin } from "@michalshelenberg/twss";
 
 const nextConfig: NextConfig = {};
 
