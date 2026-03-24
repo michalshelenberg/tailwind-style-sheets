@@ -11,6 +11,8 @@ export default defineConfig([
   {
     entry: ["src/cli.ts"],
     format: ["cjs"],
-    banner: { js: "#!/usr/bin/env node" },
+    esbuildOptions(options) {
+      options.banner = { js: "#!/usr/bin/env node" };
+    },
   },
 ]);
