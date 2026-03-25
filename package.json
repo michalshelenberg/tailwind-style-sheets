@@ -12,11 +12,12 @@
     "lint": "eslint"
   },
   "dependencies": {
+    "@michalshelenberg/clsx-module": "^0.0.1",
+    "@michalshelenberg/twss": "*",
     "clsx": "^2.1.1",
     "next": "16.2.1",
     "react": "19.2.4",
-    "react-dom": "19.2.4",
-    "@michalshelenberg/twss": "*"
+    "react-dom": "19.2.4"
   },
   "devDependencies": {
     "@tailwindcss/postcss": "^4",

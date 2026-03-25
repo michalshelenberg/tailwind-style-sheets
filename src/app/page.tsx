@@ -1,5 +1,5 @@
 import Image from "next/image";
-import { Button } from "@/components";
+import { Badge, Button } from "@/components";
 
 export default function Home() {
   return (
@@ -34,6 +34,12 @@ export default function Home() {
             </a>{" "}
             center.
           </p>
+        </div>
+        <div className="flex flex-col gap-4 sm:flex-row">
+          <Badge>New</Badge>
+          <Badge variant="success">Active</Badge>
+          <Badge variant="warning">Pending</Badge>
+          <Badge variant="danger">Error</Badge>
         </div>
         <div className="flex flex-col gap-4 text-base font-medium sm:flex-row">
           <Button>Deploy Now</Button>

@@ -90,6 +90,10 @@ Add to `.vscode/settings.json` to get CSS syntax highlighting and silence the `@
 }
 ```
 
+## See also
+
+[`@michalshelenberg/clsx-module`](https://www.npmjs.com/package/@michalshelenberg/clsx-module) — if you use CSS Modules alongside `.twss` files, this companion utility lets you resolve module class names without `styles.` prefixes or bracket notation, with full clsx-compatible syntax.
+
 ## How it works
 
 1. **Loader** (`loader.ts`) — Turbopack passes the raw `.twss` file content through the loader. A regex extracts each `.className { @apply ... }` block and converts it to `export default { className: "class1 class2 ..." }`.
