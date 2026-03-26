@@ -10,5 +10,5 @@
   text-white
   hover:bg-blue-700
   active:scale-95
-  transition-all;
+  transition-all
 }

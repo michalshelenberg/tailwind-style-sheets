@@ -4,16 +4,42 @@ A Turbopack loader and Next.js plugin for `.twss` files — co-locate your Tailw
 
 ## What it does
 
-`.twss` files use a CSS-like syntax to define named Tailwind class groups:
+`.twss` files use a CSS-like syntax to define named Tailwind class groups. Each class can be written on its own line — this is the preferred style as it keeps diffs clean and classes easy to scan:
 
 ```css
 /* Button.styles.twss */
-.base {
-  @apply px-4 py-2 rounded font-semibold;
+.button {
+  @apply
+  cursor-pointer
+  px-4
+  py-2
+  rounded-full
+  text-sm
+  font-medium
+  transition-all
+  active:scale-95
 }
 
-.primary {
-  @apply bg-blue-600 text-white hover:bg-blue-700;
+.button--primary {
+  @apply
+  bg-blue-600
+  text-white
+  hover:bg-blue-700
+}
+
+.button--ghost {
+  @apply
+  bg-transparent
+  text-blue-600
+  hover:bg-blue-50
+}
+```
+
+Inline is also valid:
+
+```css
+.button {
+  @apply cursor-pointer px-4 py-2 rounded-full text-sm font-medium transition-all active:scale-95
 }
 ```
 
@@ -21,8 +47,26 @@ Importing a `.twss` file gives you a plain object:
 
 ```ts
 import styles from "./Button.styles.twss";
-// styles.base    → "px-4 py-2 rounded font-semibold"
-// styles.primary → "bg-blue-600 text-white hover:bg-blue-700"
+// styles.button          → "cursor-pointer px-4 py-2 rounded-full text-sm font-medium transition-all active:scale-95"
+// styles["button--primary"] → "bg-blue-600 text-white hover:bg-blue-700"
+// styles["button--ghost"]   → "bg-transparent text-blue-600 hover:bg-blue-50"
+```
+
+Pair it with [`@michalshelenberg/modcn`](https://www.npmjs.com/package/@michalshelenberg/modcn) to compose BEM classes ergonomically:
+
+```tsx
+import { modcn } from "@michalshelenberg/modcn";
+import styles from "./Button.styles.twss";
+
+const cn = modcn(styles);
+
+export function Button({ variant = "primary", className, children, ...props }) {
+  return (
+    <button {...props} className={cn("button", `button--${variant}`, className)}>
+      {children}
+    </button>
+  );
+}
 ```
 
 ## Installation
@@ -31,13 +75,13 @@ import styles from "./Button.styles.twss";
 npx @michalshelenberg/twss init
 ```
 
-This scaffolds all required files and installs the package. To set up manually:
+This scaffolds all required files and installs the package.
+
+## Manual installation
 
 ```bash
 npm install @michalshelenberg/twss
 ```
-
-## Setup
 
 ### `next.config.ts`
 
@@ -89,10 +133,6 @@ Add to `.vscode/settings.json` to get CSS syntax highlighting and silence the `@
   }
 }
 ```
-
-## See also
-
-[`@michalshelenberg/modcn`](https://www.npmjs.com/package/@michalshelenberg/modcn) — if you use CSS Modules alongside `.twss` files, this companion utility lets you resolve module class names without `styles.` prefixes or bracket notation, with full clsx-compatible syntax.
 
 ## How it works
 
