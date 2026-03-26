@@ -92,7 +92,7 @@ Add to `.vscode/settings.json` to get CSS syntax highlighting and silence the `@
 
 ## See also
 
-[`@michalshelenberg/clsx-module`](https://www.npmjs.com/package/@michalshelenberg/clsx-module) — if you use CSS Modules alongside `.twss` files, this companion utility lets you resolve module class names without `styles.` prefixes or bracket notation, with full clsx-compatible syntax.
+[`@michalshelenberg/modcn`](https://www.npmjs.com/package/@michalshelenberg/modcn) — if you use CSS Modules alongside `.twss` files, this companion utility lets you resolve module class names without `styles.` prefixes or bracket notation, with full clsx-compatible syntax.
 
 ## How it works
 
