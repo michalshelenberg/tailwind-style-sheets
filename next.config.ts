@@ -1,6 +1,6 @@
 import type { NextConfig } from "next";
 import path from "path";
-import { withTwssPlugin } from "@michalshelenberg/tailwind-style-sheets";
+import { withTwssPlugin } from "tailwind-style-sheets";
 
 const nextConfig: NextConfig = {};
 

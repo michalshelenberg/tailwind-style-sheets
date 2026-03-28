@@ -72,7 +72,7 @@ export function Button({ variant = "primary", className, children, ...props }) {
 ## Installation
 
 ```bash
-npx @michalshelenberg/tailwind-style-sheets init
+npx tailwind-style-sheets init
 ```
 
 This scaffolds all required files and installs the package.
@@ -80,7 +80,7 @@ This scaffolds all required files and installs the package.
 ## Manual installation
 
 ```bash
-npm install @michalshelenberg/tailwind-style-sheets
+npm install tailwind-style-sheets
 ```
 
 ### `next.config.ts`
@@ -88,7 +88,7 @@ npm install @michalshelenberg/tailwind-style-sheets
 ```ts
 import type { NextConfig } from "next";
 import path from "path";
-import { withTwssPlugin } from "@michalshelenberg/tailwind-style-sheets";
+import { withTwssPlugin } from "tailwind-style-sheets";
 
 const nextConfig: NextConfig = {};
 

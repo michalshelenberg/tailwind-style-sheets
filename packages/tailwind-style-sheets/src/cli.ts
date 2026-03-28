@@ -58,8 +58,8 @@ if (vscodeChanged) {
 }
 
 // install tailwind-style-sheets
-console.log("installing @michalshelenberg/tailwind-style-sheets...");
-execSync("npm install @michalshelenberg/tailwind-style-sheets", { stdio: "inherit", cwd });
+console.log("installing tailwind-style-sheets...");
+execSync("npm install tailwind-style-sheets", { stdio: "inherit", cwd });
 
 // next.config.ts
 const nextConfigPath = ["next.config.ts", "next.config.mjs", "next.config.js"]
@@ -78,7 +78,7 @@ if (!nextConfigPath) {
     const insertAfter = lastImportIdx
       ? lastImportIdx.index! + lastImportIdx[0].length
       : 0;
-    const imports = `\nimport path from "path";\nimport { withTwssPlugin } from "@michalshelenberg/tailwind-style-sheets";`;
+    const imports = `\nimport path from "path";\nimport { withTwssPlugin } from "tailwind-style-sheets";`;
     src = src.slice(0, insertAfter) + imports + src.slice(insertAfter);
 
     // wrap export default <id>; with withTwssPlugin
