@@ -1,4 +1,4 @@
-# twss
+# tailwind-style-sheets
 
 A Turbopack loader and Next.js plugin for `.twss` files — co-locate your Tailwind class maps alongside components.
 
@@ -72,7 +72,7 @@ export function Button({ variant = "primary", className, children, ...props }) {
 ## Installation
 
 ```bash
-npx @michalshelenberg/twss init
+npx @michalshelenberg/tailwind-style-sheets init
 ```
 
 This scaffolds all required files and installs the package.
@@ -80,7 +80,7 @@ This scaffolds all required files and installs the package.
 ## Manual installation
 
 ```bash
-npm install @michalshelenberg/twss
+npm install @michalshelenberg/tailwind-style-sheets
 ```
 
 ### `next.config.ts`
@@ -88,7 +88,7 @@ npm install @michalshelenberg/twss
 ```ts
 import type { NextConfig } from "next";
 import path from "path";
-import { withTwssPlugin } from "@michalshelenberg/twss";
+import { withTwssPlugin } from "@michalshelenberg/tailwind-style-sheets";
 
 const nextConfig: NextConfig = {};
 

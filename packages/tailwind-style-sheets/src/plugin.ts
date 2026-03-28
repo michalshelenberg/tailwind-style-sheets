@@ -24,7 +24,7 @@ export interface TwssPluginOptions {
  * @example
  * // next.config.ts
  * import path from "path";
- * import { withTwssPlugin } from "@michalshelenberg/twss";
+ * import { withTwssPlugin } from "@michalshelenberg/tailwind-style-sheets";
  *
  * export default withTwssPlugin({}, {
  *   globalsCSS: path.resolve(__dirname, "src/app/globals.css"),
