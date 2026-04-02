@@ -1,13 +1,24 @@
 {
   "name": "tailwind-style-sheets",
-  "version": "0.0.1",
+  "version": "0.0.3",
   "main": "./dist/index.js",
   "types": "./dist/index.d.ts",
+  "exports": {
+    ".": {
+      "types": "./dist/index.d.ts",
+      "import": "./dist/index.mjs",
+      "require": "./dist/index.js"
+    },
+    "./vite": {
+      "types": "./dist/vite.d.mts",
+      "import": "./dist/vite.mjs"
+    }
+  },
   "bin": {
     "tailwind-style-sheets": "./dist/cli.js"
   },
   "scripts": {
-    "build": "tsup",
+    "build": "rm -rf dist && tsup",
     "dev": "tsup --watch"
   },
   "dependencies": {
@@ -15,7 +26,12 @@
   },
   "peerDependencies": {
     "modcn": "^0.0.1",
-    "next": ">=15"
+    "next": ">=15",
+    "vite": ">=5"
+  },
+  "peerDependenciesMeta": {
+    "next": { "optional": true },
+    "vite": { "optional": true }
   },
   "publishConfig": {
     "access": "public"
@@ -24,6 +40,7 @@
     "@types/node": "^20",
     "next": "16.2.1",
     "tsup": "^8.5.1",
-    "typescript": "^5"
+    "typescript": "^5",
+    "vite": "^8.0.1"
   }
 }

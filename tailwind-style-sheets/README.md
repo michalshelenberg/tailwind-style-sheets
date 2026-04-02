@@ -1,10 +1,10 @@
 # tailwind-style-sheets
 
-Co-locate Tailwind class maps alongside components using `.twss` files — a CSS-like syntax that pairs with a Turbopack loader and Next.js plugin.
+Use standard CSS class names in your components — `.twss` files map them to Tailwind utilities at build time.
 
 ## What it does
 
-`.twss` files use a CSS-like syntax to define named Tailwind class groups. Each class can be written on its own line — this is the preferred style as it keeps diffs clean and classes easy to scan:
+Define your class names and their Tailwind mappings in `.twss` files using familiar CSS syntax with `@apply`:
 
 ```css
 /* Button.styles.twss */
@@ -76,9 +76,10 @@ This scaffolds all required files and installs the package.
 npm install tailwind-style-sheets
 ```
 
-### `next.config.ts`
+### Next.js (Turbopack)
 
 ```ts
+// next.config.ts
 import type { NextConfig } from "next";
 import path from "path";
 import { withTwssPlugin } from "tailwind-style-sheets";
@@ -99,6 +100,22 @@ export default withTwssPlugin(nextConfig, {
 | `watchDir`   | `string` | Directory to watch recursively for `.twss` file changes. Only active in development. |
 
 Both options are optional. Omitting them disables the HMR watcher (the loader still works).
+
+### Vite
+
+```ts
+// vite.config.ts
+import { defineConfig } from "vite";
+import react from "@vitejs/plugin-react";
+import tailwindcss from "@tailwindcss/vite";
+import { twssVitePlugin } from "tailwind-style-sheets/vite";
+
+export default defineConfig({
+  plugins: [react(), tailwindcss(), twssVitePlugin()],
+});
+```
+
+The Vite plugin transforms `.twss` files and handles HMR automatically — no additional options needed.
 
 ### TypeScript
 

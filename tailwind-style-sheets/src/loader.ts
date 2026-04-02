@@ -15,18 +15,10 @@
  * Output (JS module):
  *   export default { base: "px-4 py-2 rounded font-semibold", primary: "bg-blue-600 text-white hover:bg-blue-700" }
  */
-const BLOCK_REGEX = /\.(\w[\w-]*)\s*\{\s*@apply\s+([\s\S]*?)\s*\}/g;
+import { parseTwss } from "./parse";
 
 const twssLoader: (source: string) => string = function (source) {
-  const styles: Record<string, string> = {};
-
-  let match: RegExpExecArray | null;
-  while ((match = BLOCK_REGEX.exec(source)) !== null) {
-    const [, className, classes] = match;
-    styles[className] = classes.trim().replace(/\s+/g, " ");
-  }
-
-  return `export default ${JSON.stringify(styles)};`;
+  return `export default ${JSON.stringify(parseTwss(source))};`;
 };
 
-export = twssLoader;
+export default twssLoader;

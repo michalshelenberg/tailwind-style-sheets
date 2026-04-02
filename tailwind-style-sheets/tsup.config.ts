@@ -6,7 +6,12 @@ export default defineConfig([
     format: ["cjs"],
     external: ["./loader"],
     dts: true,
-    clean: true,
+  },
+  {
+    entry: ["src/index.ts", "src/vite.ts"],
+    format: ["esm"],
+    external: ["vite"],
+    dts: true,
   },
   {
     entry: ["src/cli.ts"],

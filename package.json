@@ -3,6 +3,7 @@
   "private": true,
   "workspaces": [
     "tailwind-style-sheets",
-    "turbopack"
+    "turbopack",
+    "vite-demo"
   ]
 }
