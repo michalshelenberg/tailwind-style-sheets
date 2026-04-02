@@ -1,12 +1,14 @@
-import clsx from "clsx";
+import { twcn } from "tailwind-style-sheets";
 import styles from "./Button.styles.twss";
 import type { ButtonProps } from "./Button.types";
 
+const cn = twcn(styles);
+
 export function Button(props: ButtonProps) {
-  const { className, children, ...restProps } = props;
+  const { variant = "primary", className, children, ...restProps } = props;
 
   return (
-    <button {...restProps} className={clsx(styles.button, className)}>
+    <button {...restProps} className={cn("button", `button--${variant}`, className)}>
       {children}
     </button>
   );

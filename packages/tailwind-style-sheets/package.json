@@ -10,7 +10,11 @@
     "build": "tsup",
     "dev": "tsup --watch"
   },
+  "dependencies": {
+    "tailwind-merge": "^3.5.0"
+  },
   "peerDependencies": {
+    "modcn": "^0.0.1",
     "next": ">=15"
   },
   "publishConfig": {

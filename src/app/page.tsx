@@ -42,8 +42,8 @@ export default function Home() {
           <Badge variant="danger">Error</Badge>
         </div>
         <div className="flex flex-col gap-4 text-base font-medium sm:flex-row">
-          <Button>Deploy Now</Button>
-          <Button>Documentation</Button>
+          <Button variant="primary">Deploy Now</Button>
+          <Button variant="secondary">Documentation</Button>
         </div>
       </main>
     </div>
