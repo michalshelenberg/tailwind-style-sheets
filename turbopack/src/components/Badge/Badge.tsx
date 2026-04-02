@@ -1,8 +1,8 @@
-import { modcn } from "@michalshelenberg/modcn";
+import { twcn } from "tailwind-style-sheets";
 import styles from "./Badge.styles.twss";
 import type { BadgeProps } from "./Badge.types";
 
-const cn = modcn(styles);
+const cn = twcn(styles);
 
 export function Badge(props: BadgeProps) {
   const { variant = "default", className, children, ...restProps } = props;

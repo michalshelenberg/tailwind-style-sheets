@@ -1,1 +1,1 @@
-packages/tailwind-style-sheets/README.md
+tailwind-style-sheets/README.md

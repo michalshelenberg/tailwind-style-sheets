@@ -1,11 +1,10 @@
 # See https://help.github.com/articles/ignoring-files/ for more about ignoring files.
 
 # dependencies
-/node_modules
-/packages/*/node_modules
+node_modules
 
-# packages build output
-/packages/*/dist
+# build output
+/tailwind-style-sheets/dist
 /.pnp
 .pnp.*
 .yarn/*
@@ -18,11 +17,11 @@
 /coverage
 
 # next.js
-/.next/
-/out/
+.next/
+/turbopack/out/
 
 # production
-/build
+/turbopack/build
 
 # misc
 .DS_Store

@@ -1,6 +1,6 @@
 # tailwind-style-sheets
 
-A Turbopack loader and Next.js plugin for `.twss` files — co-locate your Tailwind class maps alongside components.
+Co-locate Tailwind class maps alongside components using `.twss` files — a CSS-like syntax that pairs with a Turbopack loader and Next.js plugin.
 
 ## What it does
 
@@ -43,22 +43,13 @@ Inline is also valid:
 }
 ```
 
-Importing a `.twss` file gives you a plain object:
-
-```ts
-import styles from "./Button.styles.twss";
-// styles.button          → "cursor-pointer px-4 py-2 rounded-full text-sm font-medium transition-all active:scale-95"
-// styles["button--primary"] → "bg-blue-600 text-white hover:bg-blue-700"
-// styles["button--ghost"]   → "bg-transparent text-blue-600 hover:bg-blue-50"
-```
-
-Pair it with [`@michalshelenberg/modcn`](https://www.npmjs.com/package/@michalshelenberg/modcn) to compose BEM classes ergonomically:
+## Usage
 
 ```tsx
-import { modcn } from "@michalshelenberg/modcn";
+import { twcn } from "tailwind-style-sheets";
 import styles from "./Button.styles.twss";
 
-const cn = modcn(styles);
+const cn = twcn(styles);
 
 export function Button({ variant = "primary", className, children, ...props }) {
   return (
@@ -68,6 +59,8 @@ export function Button({ variant = "primary", className, children, ...props }) {
   );
 }
 ```
+
+`twcn` takes the imported styles object, and returns a function that resolves class names with `tailwind-merge` — pass it style keys, modifiers, and an optional `className` override.
 
 ## Installation
 
@@ -133,9 +126,3 @@ Add to `.vscode/settings.json` to get CSS syntax highlighting and silence the `@
   }
 }
 ```
-
-## How it works
-
-1. **Loader** (`loader.ts`) — Turbopack passes the raw `.twss` file content through the loader. A regex extracts each `.className { @apply ... }` block and converts it to `export default { className: "class1 class2 ..." }`.
-
-2. **HMR watcher** (`plugin.ts`) — In development, `fs.watch` monitors `watchDir` for `.twss` changes. When a change is detected, it touches `globalsCSS`, which causes Next.js to re-run Tailwind's class scan and hot-reload styles.

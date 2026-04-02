@@ -8,7 +8,6 @@
   font-medium
   active:scale-95
   transition-all
-  bg-red-500
 }
 
 .button--primary {
